@@ -1,0 +1,54 @@
+name: breeze_and_bulletin
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.1
+
+dependencies:
+  cached_network_image: ^3.4.1
+  cupertino_icons: ^1.0.2
+  dio: ^5.6.0
+  equatable: ^2.0.0
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.6
+  get_it: 7.6.0
+  intl: ^0.19.0
+  json_annotation: ^4.8.1
+  logger: any
+  retrofit: '>=4.0.0 <5.0.0'
+  web_socket_channel: ^3.0.1
+
+dev_dependencies:
+  bloc_test: ^9.1.7
+  build_runner: '>=2.3.0 <4.0.0'
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+  http: ^1.1.0
+  json_serializable: ^6.6.2
+  mockito: ^5.4.4
+  mocktail: ^1.0.4
+  retrofit_generator: '>=7.0.0 <8.0.0'
+
+# The following section is specific to Flutter packages.
+flutter:
+  uses-material-design: true
+  assets:
+     - lib/assets/images/
+  fonts:
+     - family: NewYorkSmall
+       fonts:
+         - asset: lib/assets/fonts/NewYorkSmall-Regular.ttf
+         - asset: lib/assets/fonts/NewYorkSmall-Medium.ttf
+         - asset: lib/assets/fonts/NewYorkSmall-SemiBold.ttf
+     - family: Nunito
+       fonts:
+         - asset: lib/assets/fonts/Nunito-Regular.ttf
+         - asset: lib/assets/fonts/Nunito-Medium.ttf
+         - asset: lib/assets/fonts/Nunito-SemiBold.ttf
+         - asset: lib/assets/fonts/Nunito-Bold.ttf
