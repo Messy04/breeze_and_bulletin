@@ -1,7 +1,7 @@
 name: breeze_and_bulletin
 description: "A new Flutter project."
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -16,6 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_svg: ^2.0.10+1
   get_it: 7.6.0
   intl: ^0.19.0
   json_annotation: ^4.8.1
@@ -39,16 +40,29 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-     - lib/assets/images/
+    - lib/assets/images/svg/
   fonts:
-     - family: NewYorkSmall
-       fonts:
-         - asset: lib/assets/fonts/NewYorkSmall-Regular.ttf
-         - asset: lib/assets/fonts/NewYorkSmall-Medium.ttf
-         - asset: lib/assets/fonts/NewYorkSmall-SemiBold.ttf
-     - family: Nunito
-       fonts:
-         - asset: lib/assets/fonts/Nunito-Regular.ttf
-         - asset: lib/assets/fonts/Nunito-Medium.ttf
-         - asset: lib/assets/fonts/Nunito-SemiBold.ttf
-         - asset: lib/assets/fonts/Nunito-Bold.ttf
+    - family: Nunito
+      fonts:
+        - asset: lib/assets/fonts/nunito/Nunito-Regular.ttf
+        - asset: lib/assets/fonts/nunito/Nunito-Medium.ttf
+          weight: 400
+        - asset: lib/assets/fonts/nunito/Nunito-SemiBold.ttf
+          weight: 600
+        - asset: lib/assets/fonts/nunito/Nunito-Bold.ttf
+          weight: 800
+
+    - family: NewYorkSmall
+      fonts:
+        - asset: lib/assets/fonts/new_york_small/NewYorkSmall-Regular.ttf
+        - asset: lib/assets/fonts/new_york_small/NewYorkSmall-Medium.ttf
+          weight: 400
+        - asset: lib/assets/fonts/new_york_small/NewYorkSmall-SemiBold.ttf
+          weight: 600
+        - asset: lib/assets/fonts/new_york_small/NewYorkSmall-Bold.ttf
+          weight: 800
+
+flutter_intl:
+  enabled: true
+  class_name: Strings
+  nullsafety:
