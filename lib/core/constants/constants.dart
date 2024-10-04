@@ -1,4 +1,2 @@
-// const String finnhubApiKey = 'crnrsnpr01qt44dik43gcrnrsnpr01qt44dik440';
-
-const String coinGeckoBaseUrl = 'https://api.coingecko.com/api/v3';
-const String binanceWebsocketUrl = 'wss://stream.binance.com:9443/ws';
+const String newsApiBaseUrl = 'https://newsapi.org/v2/';
+const String newsApiKey = 'fb579a2623a644c69804a4a9921007ec';
