@@ -15,12 +15,13 @@ class _NewsCategoryWidgetState extends State<NewsCategoryWidget> {
   int _selectedIndex = 0;
 
   final Map<int, String> _categories = {
-    0: 'Health',
+    0: 'Trending',
     1: 'Sports',
     2: 'Technology',
     3: 'Finance',
     4: 'Science',
-    5: 'Arts',
+    5: 'Health',
+    6: 'Arts',
   };
 
   @override
