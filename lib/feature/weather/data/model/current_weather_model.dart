@@ -177,10 +177,14 @@ class CurrentWeatherModel extends CurrentWeatherEntity {
 }
 
 class ConditionModel extends ConditionEntity {
+  final String? text;
+  final String? icon;
+  final int? code;
+
   const ConditionModel({
-    WeatherStatus? text,
-    WeatherIcon? icon,
-    int? code,
+    this.text,
+    this.icon,
+    this.code,
   });
 
   factory ConditionModel.fromRawJson(String str) =>
@@ -189,14 +193,14 @@ class ConditionModel extends ConditionEntity {
   String toRawJson() => json.encode(toJson());
 
   factory ConditionModel.fromJson(Map<String, dynamic> json) => ConditionModel(
-        text: weatherTextValues.map[json["text"]],
-        icon: weatherIconValues.map[json["icon"]],
+        text: json["text"],
+        icon: json["icon"],
         code: json["code"],
       );
 
   Map<String, dynamic> toJson() => {
-        "text": weatherTextValues.reverse[text],
-        "icon": weatherIconValues.reverse[icon],
+        "text": text,
+        "icon": icon,
         "code": code,
       };
 }

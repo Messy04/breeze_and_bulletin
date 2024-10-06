@@ -126,8 +126,8 @@ class CurrentWeatherEntity extends Equatable {
 }
 
 class ConditionEntity extends Equatable {
-  final WeatherStatus? text;
-  final WeatherIcon? icon;
+  final String? text;
+  final String? icon;
   final int? code;
 
   const ConditionEntity({

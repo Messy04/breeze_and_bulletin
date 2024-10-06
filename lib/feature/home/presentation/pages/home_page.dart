@@ -1,7 +1,6 @@
 import 'package:breeze_and_bulletin/core/constants/dimension.dart';
 import 'package:breeze_and_bulletin/core/constants/spacing.dart';
 import 'package:breeze_and_bulletin/core/resources/injection_container.dart';
-import 'package:breeze_and_bulletin/feature/aqi/presentation/widgets/aqi_home_widget.dart';
 import 'package:breeze_and_bulletin/feature/home/presentation/widget/bottom_nav_bar.dart';
 import 'package:breeze_and_bulletin/feature/home/presentation/widget/notification_widget.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/bloc/news_category_bloc.dart';
@@ -51,8 +50,7 @@ class HomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _weatherWidget(),
-                        WidthBox.size8,
-                        const AQIHomeWidget(),
+                        // _weatherWidget(),
                       ],
                     ),
                   ],

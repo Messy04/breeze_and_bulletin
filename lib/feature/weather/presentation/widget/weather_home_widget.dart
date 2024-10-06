@@ -21,11 +21,11 @@ class WeatherHomeWidget extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.all(Dimension.s16),
             decoration: BoxDecoration(
-              color: AppColors.colorF0F1FA,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(Dimension.s8),
               boxShadow: [
                 BoxShadow(
-                  blurRadius: Dimension.s4,
+                  blurRadius: Dimension.s6,
                   offset: const Offset(-1, 2),
                   color: AppColors.color8C8C8C,
                 )
@@ -34,22 +34,29 @@ class WeatherHomeWidget extends StatelessWidget {
             child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _locationWidget(state),
                     WidthBox.size16,
                     _weatherStatusImageWidget(state),
                   ],
                 ),
-                HeightBox.size8,
+                HeightBox.size4,
                 Center(
                   child: Text(
-                    state.response?.currentWeather?.tempC.toString() ?? '',
-                    style: PrimaryFont.instance.semiBold(size: Dimension.s22),
+                    '${state.response?.currentWeather?.tempC ?? 0}°C / ${state.response?.currentWeather?.tempF ?? 0}°F',
+                    style: PrimaryFont.instance.semiBold(size: Dimension.s24),
                   ),
                 ),
+                HeightBox.size4,
                 Text(
-                  state.response?.currentWeather?.condition?.text?.name ?? '',
-                  style: PrimaryFont.instance.bold(),
+                  'Humidity: ${state.response?.currentWeather?.humidity}%',
+                  style: PrimaryFont.instance.bold(size: Dimension.s16),
+                ),
+                HeightBox.size4,
+                Text(
+                  'Feels Like: ${state.response?.currentWeather?.feelslikeC ?? 0}°C / ${state.response?.currentWeather?.feelslikeF ?? 0}°F',
+                  style: PrimaryFont.instance.bold(size: Dimension.s16),
                 ),
               ],
             ),
@@ -61,6 +68,7 @@ class WeatherHomeWidget extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(Dimension.s8),
             ),
+            width: 100,
             height: 100,
           ),
         );
@@ -73,26 +81,33 @@ class WeatherHomeWidget extends StatelessWidget {
       children: [
         SizedBox(
           height: Dimension.s20,
-          width: Dimension.s12,
+          width: Dimension.s14,
           child: SvgPicture.asset(SvgImage.locationIcon),
         ),
         Text(
           state.response?.location?.name ?? '',
-          style: PrimaryFont.instance.bold(size: Dimension.s16),
+          style: PrimaryFont.instance.bold(size: Dimension.s18),
         ),
       ],
     );
   }
 
   Widget _weatherStatusImageWidget(ShowWeatherDetails state) {
-    return SizedBox(
-      child: CachedNetworkImage(
-        height: Dimension.s24,
-        width: Dimension.s24,
-        imageUrl: 'https://cdn.weatherapi.com/weather/64x64/night/116.png',
-            // 'https:${state.response?.currentWeather?.condition?.icon?.name}' ??
-            //     'https://cdn.weatherapi.com/weather/64x64/night/116.png',
-      ),
+    return Row(
+      children: [
+        SizedBox(
+          child: CachedNetworkImage(
+            height: Dimension.s48,
+            width: Dimension.s48,
+            imageUrl:
+                'https:${state.response?.currentWeather?.condition?.icon}',
+          ),
+        ),
+        Text(
+          state.response?.currentWeather?.condition?.text ?? '',
+          style: PrimaryFont.instance.bold(size: Dimension.s16),
+        ),
+      ],
     );
   }
 }

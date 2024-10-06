@@ -26,6 +26,7 @@ class WeatherHomeBloc extends Bloc<WeatherHomeEvent, WeatherHomeState> {
     GetCurrentWeatherEvent event,
     Emitter<WeatherHomeState> emit,
   ) async {
+    emit(WeatherLoadingState());
     final response = await getCurrentWeatherUsecase.execute(data: 'Dehri');
 
     if (response.error != null) {
