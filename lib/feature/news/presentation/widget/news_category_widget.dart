@@ -2,64 +2,67 @@ import 'package:breeze_and_bulletin/config/theme/app_colors.dart';
 import 'package:breeze_and_bulletin/config/theme/app_fonts.dart';
 import 'package:breeze_and_bulletin/core/constants/dimension.dart';
 import 'package:breeze_and_bulletin/core/constants/spacing.dart';
+import 'package:breeze_and_bulletin/feature/news/presentation/bloc/news_category_bloc.dart';
+import 'package:breeze_and_bulletin/feature/news/presentation/bloc/news_home_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class NewsCategoryWidget extends StatefulWidget {
-  const NewsCategoryWidget({super.key});
+class NewsCategoryWidget extends StatelessWidget {
+  final Function(int, String) onSelection;
+  final String selectedCategory;
 
-  @override
-  State<NewsCategoryWidget> createState() => _NewsCategoryWidgetState();
-}
-
-class _NewsCategoryWidgetState extends State<NewsCategoryWidget> {
-  int _selectedIndex = 0;
-
-  final Map<int, String> _categories = {
-    0: 'Trending',
-    1: 'Sports',
-    2: 'Technology',
-    3: 'Finance',
-    4: 'Science',
-    5: 'Health',
-    6: 'Arts',
-  };
+  const NewsCategoryWidget({
+    required this.onSelection,
+    required this.selectedCategory,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _categories.length,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        return Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                setState(() => _selectedIndex = index);
-              },
-              child: _buildContainer(index),
-            ),
-            WidthBox.size8,
-          ],
-        );
+    return BlocBuilder<NewsCategoryBloc, NewsHomeState>(
+      builder: (context, state) {
+        if (state is ShowNewsCategories) {
+          return ListView.builder(
+            itemCount: state.categories.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      onSelection(index, state.categories[index]!);
+                    },
+                    child: _buildCategoryContainer(index, state),
+                  ),
+                  WidthBox.size8,
+                ],
+              );
+            },
+          );
+        }
+        return Container();
       },
-      // shrinkWrap: true,
     );
   }
 
-  Container _buildContainer(int index) {
+  Container _buildCategoryContainer(int index, ShowNewsCategories state) {
+    final selectedIndex = state.categories.keys.firstWhere(
+      (k) => state.categories[k] == selectedCategory,
+    );
+
     return Container(
       padding: const EdgeInsets.all(Dimension.s12),
       decoration: BoxDecoration(
-        color: _selectedIndex == _categories.keys.toList()[index]
+        color: selectedIndex == state.categories.keys.toList()[index]
             ? AppColors.primary
             : AppColors.colorF0F1FA,
         borderRadius: BorderRadius.circular(Dimension.s20),
       ),
       child: Text(
-        _categories.values.toList()[index],
-        style: _selectedIndex == _categories.keys.toList()[index]
-            ? PrimaryFont.instance.bold()
-            : PrimaryFont.instance.bold(color: Colors.black87),
+        state.categories.values.toList()[index],
+        style: selectedIndex == state.categories.keys.toList()[index]
+            ? PrimaryFont.instance.bold(color: Colors.white)
+            : PrimaryFont.instance.bold(),
         textAlign: TextAlign.center,
       ),
     );

@@ -18,4 +18,8 @@ class AppColors {
   static Color get colorEEEEEE => const Color(0xffeeeeee);
 
   static Color get colorF0F1FA => const Color(0xfff0f1fa);
+
+  static Color get shimmerBase => Colors.grey[400]!;
+
+  static Color get shimmerHighlight => Colors.grey[100]!;
 }

@@ -58,17 +58,17 @@ class NewsRepositoryImpl implements NewsRepository {
 
   @override
   Future<DataState<ArticleModelList>> searchNews({
+    required String query,
     String? country,
     String? category,
     String? sources,
-    String? query,
     String? sortBy,
     int? pageSize,
     int? page,
   }) async {
     try {
       final httpResponse = await newsApiService.searchNews(
-        query: query ?? '',
+        query: query,
         page: page,
         pageSize: pageSize,
         sortBy: sortBy,

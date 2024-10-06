@@ -21,7 +21,7 @@ abstract class NewsApiService {
 
   @GET('everything')
   Future<HttpResponse<ArticleResponse>> searchNews({
-    @Query('q') String query,
+    @Query('q') String? query,
     @Query('sortBy') String? sortBy = 'publishedAt', // popularity
     @Query('pageSize') int? pageSize = 15,
     @Query('page') int? page,

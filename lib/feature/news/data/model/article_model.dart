@@ -3,24 +3,24 @@ import 'package:breeze_and_bulletin/feature/news/domain/entity/article_entity.da
 
 class ArticleModel extends ArticleEntity {
   
-  SourceModel? source;
-  String? author;
-  String? title;
-  String? description;
-  String? url;
-  String? urlToImage;
-  String? publishedAt;
-  String? content;
+  // SourceModel? source;
+  // String? author;
+  // String? title;
+  // String? description;
+  // String? url;
+  // String? urlToImage;
+  // String? publishedAt;
+  // String? content;
 
   ArticleModel({
-    this.source,
-    this.author,
-    this.title,
-    this.description,
-    this.url,
-    this.urlToImage,
-    this.publishedAt,
-    this.content,
+    SourceModel? source,
+    String? author,
+    String? title,
+    String? description,
+    String? url,
+    String? urlToImage,
+    String? publishedAt,
+    String? content,
   });
 
   ArticleModel.fromJson(Map<String, dynamic> json) {

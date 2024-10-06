@@ -65,7 +65,7 @@ class _NewsApiService implements NewsApiService {
 
   @override
   Future<HttpResponse<ArticleResponse>> searchNews({
-    required String query,
+    String? query,
     String? sortBy = 'publishedAt',
     int? pageSize = 15,
     int? page,

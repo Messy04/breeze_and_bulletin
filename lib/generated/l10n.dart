@@ -99,6 +99,36 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Unable to establish connection, Please try after sometime.`
+  String get connectionError {
+    return Intl.message(
+      'Unable to establish connection, Please try after sometime.',
+      name: 'connectionError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connection timeout, Please try again.`
+  String get connectionTimeoutError {
+    return Intl.message(
+      'Connection timeout, Please try again.',
+      name: 'connectionTimeoutError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong, Please try after sometime.`
+  String get somethingWentWrong {
+    return Intl.message(
+      'Something went wrong, Please try after sometime.',
+      name: 'somethingWentWrong',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

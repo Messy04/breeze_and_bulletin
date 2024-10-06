@@ -13,10 +13,10 @@ abstract class NewsRepository {
   });
 
   Future<DataState<ArticleEntityList>> searchNews({
+    required String query,
     String? country,
     String? category,
     String? sources,
-    String? query,
     String? sortBy,
     int? pageSize,
     int? page,

@@ -29,7 +29,6 @@ class SearchWidget extends StatelessWidget {
       child: TextField(
         style: PrimaryFont.instance.medium(
           size: Dimension.s16,
-          color: Colors.black87,
         ),
         cursorColor: AppColors.primary,
         keyboardType: TextInputType.name,

@@ -14,7 +14,7 @@ abstract class Font {
   final Color color;
 
   const Font({
-    this.color = Colors.white,
+    this.color = Colors.black87,
     this.style = FontStyle.normal,
     this.themeType = ThemeType.light,
   });

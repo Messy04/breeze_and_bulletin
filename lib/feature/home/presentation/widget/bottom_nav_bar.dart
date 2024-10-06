@@ -29,7 +29,7 @@ class BottomNavBar extends StatelessWidget {
               HeightBox.size4,
               Text(
                 Strings.of(context).homeTitle,
-                style: PrimaryFont.instance.regular(color: Colors.black87),
+                style: PrimaryFont.instance.regular(),
               ),
             ],
           ),

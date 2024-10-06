@@ -2,16 +2,17 @@ import 'package:breeze_and_bulletin/feature/news/data/model/source_model.dart';
 import 'package:equatable/equatable.dart';
 
 class ArticleEntity extends Equatable {
-  final SourceModel? source;
-  final String? author;
-  final String? title;
-  final String? description;
-  final String? url;
-  final String? urlToImage;
-  final String? publishedAt;
-  final String? content;
 
-  const ArticleEntity({
+  SourceModel? source;
+  String? author;
+  String? title;
+  String? description;
+  String? url;
+  String? urlToImage;
+  String? publishedAt;
+  String? content;
+
+  ArticleEntity({
     this.source,
     this.author,
     this.title,
