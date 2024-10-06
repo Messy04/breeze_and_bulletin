@@ -13,4 +13,5 @@ class SvgImage {
   static const String deleteBlack = '${imagePath}delete_black.svg';
   static const String searchIcon = '${imagePath}search_icon.svg';
   static const String notificationIcon = '${imagePath}notification_icon.svg';
+  static const String locationIcon = '${imagePath}location_icon.svg';
 }

@@ -28,10 +28,10 @@ class NewsCategoryBloc extends Bloc<NewsHomeEvent, NewsHomeState> {
       0: null,
       1: 'Sports',
       2: 'Technology',
-      // 3: 'Finance',
-      3: 'Science',
-      4: 'Health',
-      // 6: 'Arts',
+      3: 'Business',
+      4: 'Science',
+      5: 'Health',
+      6: 'Entertainment',
     };
   }
 }

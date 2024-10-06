@@ -13,7 +13,6 @@ class NewsPageView extends StatelessWidget {
   NewsPageView({super.key});
 
   final _controller = PageController(viewportFraction: 1);
-  final double aspectRatio = 320 / 200;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class NewsPageView extends StatelessWidget {
       builder: (context, state) {
         if (state is ShowArticlesState) {
           return AspectRatio(
-            aspectRatio: 320 / 340,
+            aspectRatio: 320 / 280,
             child: OverflowBox(
               maxWidth: MediaQuery.of(context).size.width,
               child: PageView.builder(
@@ -45,6 +44,7 @@ class NewsPageView extends StatelessWidget {
                           style: SecondaryFont.instance.bold(
                             size: Dimension.s20,
                           ),
+                          maxLines: 1,
                         ),
                       ],
                     ),
@@ -64,12 +64,15 @@ class NewsPageView extends StatelessWidget {
 
   Widget _buildArticleBasicInfo(ShowArticlesState state, int index) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          'by ${state.articles[index].author ?? 'Author'}',
-          style: PrimaryFont.instance.bold(),
+        Expanded(
+          child: Text(
+            'by ${state.articles[index].author ?? 'Author'}',
+            style: PrimaryFont.instance.bold(),
+          ),
         ),
-        const Spacer(),
+        WidthBox.size16,
         Text(
           getFormattedDate(state.articles[index].publishedAt).ddMMMyyyy(),
           style: PrimaryFont.instance.bold(),
@@ -102,7 +105,7 @@ class NewsPageView extends StatelessWidget {
       child: Column(
         children: [
           AspectRatio(
-            aspectRatio: aspectRatio,
+            aspectRatio: 320 / 200,
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.greenAccent,
@@ -111,27 +114,27 @@ class NewsPageView extends StatelessWidget {
             ),
           ),
           HeightBox.size4,
-          Row(
-            children: [
-              Container(
-                color: Colors.white,
-                height: Dimension.s20,
-                width: Dimension.s100,
-              ),
-              const Spacer(),
-              Container(
-                color: Colors.white,
-                height: Dimension.s20,
-                width: Dimension.s100,
-              ),
-            ],
-          ),
-          HeightBox.size16,
-          Container(
-            color: Colors.white,
-            height: Dimension.s48,
-            width: MediaQuery.of(context).size.width,
-          ),
+          // Row(
+          //   children: [
+          //     Container(
+          //       color: Colors.white,
+          //       height: Dimension.s20,
+          //       width: Dimension.s100,
+          //     ),
+          //     const Spacer(),
+          //     Container(
+          //       color: Colors.white,
+          //       height: Dimension.s20,
+          //       width: Dimension.s100,
+          //     ),
+          //   ],
+          // ),
+          // HeightBox.size16,
+          // Container(
+          //   color: Colors.white,
+          //   height: Dimension.s48,
+          //   width: MediaQuery.of(context).size.width,
+          // ),
         ],
       ),
     );
