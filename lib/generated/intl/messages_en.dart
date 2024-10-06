@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "From Crypto to Football to the Mars"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "somethingWentWrong": MessageLookupByLibrary.simpleMessage(
-            "Something went wrong, Please try after sometime.")
+            "Something went wrong, Please try after sometime."),
+        "trendingTitle": MessageLookupByLibrary.simpleMessage("Trending")
       };
 }

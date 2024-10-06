@@ -6,5 +6,6 @@
   "profileTitle": "Profile",
   "connectionError": "Unable to establish connection, Please try after sometime.",
   "connectionTimeoutError": "Connection timeout, Please try again.",
-  "somethingWentWrong": "Something went wrong, Please try after sometime."
+  "somethingWentWrong": "Something went wrong, Please try after sometime.",
+  "trendingTitle": "Trending"
 }

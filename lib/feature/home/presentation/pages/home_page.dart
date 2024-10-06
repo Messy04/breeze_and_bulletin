@@ -8,6 +8,7 @@ import 'package:breeze_and_bulletin/feature/news/presentation/bloc/top_news_bloc
 import 'package:breeze_and_bulletin/feature/news/presentation/widget/news_category_widget.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/widget/top_news_widget.dart';
 import 'package:breeze_and_bulletin/feature/home/presentation/widget/search_widget.dart';
+import 'package:breeze_and_bulletin/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,8 +23,8 @@ class HomePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(
           top: Dimension.s32,
-          left: Dimension.s24,
-          right: Dimension.s24,
+          left: Dimension.s16,
+          right: Dimension.s16,
         ),
         child: BlocBuilder<NewsHomeBloc, NewsHomeState>(
           builder: (context, state) {
@@ -38,7 +39,7 @@ class HomePage extends StatelessWidget {
                       const NotificationWidget(),
                     ],
                   ),
-                  HeightBox.size32,
+                  HeightBox.size24,
                   _newsCategoriesSection(context, state),
                   HeightBox.size16,
                   _topNewsSection(context, state),
@@ -59,16 +60,18 @@ class HomePage extends StatelessWidget {
           category: _selectedCategory,
         ));
     return TopNewsWidget(
-      title: _selectedCategory ?? 'Trending',
+      title: _selectedCategory ?? Strings.of(context).trendingTitle,
     );
   }
 
   Widget _newsCategoriesSection(BuildContext context, NewsHomeInitial state) {
     context.read<NewsCategoryBloc>().add(GetNewsCategories());
+    _selectedCategory = state.category;
     return SizedBox(
       height: Dimension.s50,
       child: NewsCategoryWidget(
-        selectedCategory: _selectedCategory ?? 'Trending',
+        selectedCategory:
+            _selectedCategory ?? Strings.of(context).trendingTitle,
         onSelection: (index, value) {
           context.read<NewsHomeBloc>().add(GetHomeNewsEvent(
                 category: value,

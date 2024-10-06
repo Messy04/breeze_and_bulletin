@@ -2,6 +2,7 @@ import 'package:breeze_and_bulletin/config/theme/app_fonts.dart';
 import 'package:breeze_and_bulletin/core/constants/dimension.dart';
 import 'package:breeze_and_bulletin/core/constants/spacing.dart';
 import 'package:breeze_and_bulletin/core/resources/widgets/shimmer_loading.dart';
+import 'package:breeze_and_bulletin/core/utils/app_extensions.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/bloc/news_home_bloc.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/bloc/top_news_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -30,8 +31,9 @@ class NewsPageView extends StatelessWidget {
                 itemCount: state.articles.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: Dimension.s16),
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: Dimension.s16,
+                    ),
                     child: Column(
                       children: [
                         _buildImage(index, state),
@@ -69,11 +71,17 @@ class NewsPageView extends StatelessWidget {
         ),
         const Spacer(),
         Text(
-          state.articles[index].publishedAt ?? '',
+          getFormattedDate(state.articles[index].publishedAt).ddMMMyyyy(),
           style: PrimaryFont.instance.bold(),
         ),
       ],
     );
+  }
+
+  DateTime getFormattedDate(String? date) {
+    final now = DateTime.now();
+    final formatted = DateTime.parse(date ?? now.toString());
+    return formatted;
   }
 
   Widget _buildImage(int index, ShowArticlesState state) {

@@ -4,11 +4,12 @@ import 'package:breeze_and_bulletin/core/constants/dimension.dart';
 import 'package:breeze_and_bulletin/core/constants/spacing.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/bloc/news_category_bloc.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/bloc/news_home_bloc.dart';
+import 'package:breeze_and_bulletin/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewsCategoryWidget extends StatelessWidget {
-  final Function(int, String) onSelection;
+  final Function(int, String?) onSelection;
   final String selectedCategory;
 
   const NewsCategoryWidget({
@@ -30,7 +31,10 @@ class NewsCategoryWidget extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      onSelection(index, state.categories[index]!);
+                      onSelection(
+                        index,
+                        state.categories[index],
+                      );
                     },
                     child: _buildCategoryContainer(index, state),
                   ),
@@ -48,6 +52,7 @@ class NewsCategoryWidget extends StatelessWidget {
   Container _buildCategoryContainer(int index, ShowNewsCategories state) {
     final selectedIndex = state.categories.keys.firstWhere(
       (k) => state.categories[k] == selectedCategory,
+      orElse: () => 0,
     );
 
     return Container(
@@ -59,7 +64,8 @@ class NewsCategoryWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(Dimension.s20),
       ),
       child: Text(
-        state.categories.values.toList()[index],
+        state.categories.values.toList()[index] ??
+            Strings.current.trendingTitle,
         style: selectedIndex == state.categories.keys.toList()[index]
             ? PrimaryFont.instance.bold(color: Colors.white)
             : PrimaryFont.instance.bold(),

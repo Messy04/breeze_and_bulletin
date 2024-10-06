@@ -129,6 +129,16 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Trending`
+  String get trendingTitle {
+    return Intl.message(
+      'Trending',
+      name: 'trendingTitle',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

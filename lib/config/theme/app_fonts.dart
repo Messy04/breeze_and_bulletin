@@ -1,13 +1,6 @@
 import 'package:breeze_and_bulletin/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-// enum FontType {
-//   bold,
-//   medium,
-//   regular,
-//   semiBold,
-// }
-
 abstract class Font {
   final ThemeType themeType;
   final FontStyle style;
