@@ -3,25 +3,25 @@ import 'dart:io';
 
 import 'package:breeze_and_bulletin/core/resources/data_state.dart';
 import 'package:breeze_and_bulletin/core/resources/usecase.dart';
-import 'package:breeze_and_bulletin/core/utils/app_typedefs.dart';
-import 'package:breeze_and_bulletin/feature/news/domain/entity/article_request_entity.dart';
-import 'package:breeze_and_bulletin/feature/news/domain/repository/news_repository.dart';
+import 'package:breeze_and_bulletin/feature/weather/domain/entity/weather_response_entity.dart';
+import 'package:breeze_and_bulletin/feature/weather/domain/repository/weather_repository.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
-class SearchNewsUseCase extends UseCase<Future<DataState<ArticleEntityList>>,
-    ArticleRequestEntity?> {
-  final NewsRepository newsRepository;
+class GetWeatherForecastUsecase extends UseCase<
+    Future<DataState<WeatherResponseEntity?>>, Map<String, dynamic>?> {
+  final WeatherRepository weatherRepository;
 
-  SearchNewsUseCase({required this.newsRepository});
+  GetWeatherForecastUsecase({required this.weatherRepository});
 
   @override
-  Future<DataState<ArticleEntityList>> execute({data}) async {
+  Future<DataState<WeatherResponseEntity?>> execute({data}) async {
     try {
-      final response = await newsRepository.searchNews(
-        query: data?.query ?? '',
+      final response = await weatherRepository.getWeatherForecast(
+        place: data?['place'] as String,
+        days: data?['days'] as int,
       );
-      return DataSuccess(response.data ?? []);
+      return DataSuccess(response.data);
     } on SocketException catch (e) {
       return DataFailed(
         DioException(
@@ -39,7 +39,7 @@ class SearchNewsUseCase extends UseCase<Future<DataState<ArticleEntityList>>,
         ),
       );
     } catch (e, st) {
-      debugPrint('Stack Trace: SearchNews \n$st');
+      debugPrint('Stack Trace: GetWeatherForecast \n$st');
       return DataFailed(
         DioException(
           message: e.toString(),

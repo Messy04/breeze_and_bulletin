@@ -2,6 +2,7 @@ import 'package:breeze_and_bulletin/config/theme/app_fonts.dart';
 import 'package:breeze_and_bulletin/core/constants/dimension.dart';
 import 'package:breeze_and_bulletin/core/constants/spacing.dart';
 import 'package:breeze_and_bulletin/core/resources/widgets/shimmer_loading.dart';
+import 'package:breeze_and_bulletin/core/utils/app_extensions.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/bloc/news_home_bloc.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/bloc/top_news_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -12,7 +13,6 @@ class NewsPageView extends StatelessWidget {
   NewsPageView({super.key});
 
   final _controller = PageController(viewportFraction: 1);
-  final double aspectRatio = 320 / 200;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class NewsPageView extends StatelessWidget {
       builder: (context, state) {
         if (state is ShowArticlesState) {
           return AspectRatio(
-            aspectRatio: 320 / 340,
+            aspectRatio: 320 / 260,
             child: OverflowBox(
               maxWidth: MediaQuery.of(context).size.width,
               child: PageView.builder(
@@ -30,8 +30,9 @@ class NewsPageView extends StatelessWidget {
                 itemCount: state.articles.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: Dimension.s16),
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: Dimension.s16,
+                    ),
                     child: Column(
                       children: [
                         _buildImage(index, state),
@@ -43,6 +44,7 @@ class NewsPageView extends StatelessWidget {
                           style: SecondaryFont.instance.bold(
                             size: Dimension.s20,
                           ),
+                          maxLines: 1,
                         ),
                       ],
                     ),
@@ -62,18 +64,27 @@ class NewsPageView extends StatelessWidget {
 
   Widget _buildArticleBasicInfo(ShowArticlesState state, int index) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          'by ${state.articles[index].author ?? 'Author'}',
-          style: PrimaryFont.instance.bold(),
+        Expanded(
+          child: Text(
+            'by ${state.articles[index].author ?? 'Author'}',
+            style: PrimaryFont.instance.bold(),
+          ),
         ),
-        const Spacer(),
+        WidthBox.size16,
         Text(
-          state.articles[index].publishedAt ?? '',
+          getFormattedDate(state.articles[index].publishedAt).ddMMMyyyy(),
           style: PrimaryFont.instance.bold(),
         ),
       ],
     );
+  }
+
+  DateTime getFormattedDate(String? date) {
+    final now = DateTime.now();
+    final formatted = DateTime.parse(date ?? now.toString());
+    return formatted;
   }
 
   Widget _buildImage(int index, ShowArticlesState state) {
@@ -94,7 +105,7 @@ class NewsPageView extends StatelessWidget {
       child: Column(
         children: [
           AspectRatio(
-            aspectRatio: aspectRatio,
+            aspectRatio: 320 / 200,
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.greenAccent,
@@ -103,27 +114,27 @@ class NewsPageView extends StatelessWidget {
             ),
           ),
           HeightBox.size4,
-          Row(
-            children: [
-              Container(
-                color: Colors.white,
-                height: Dimension.s20,
-                width: Dimension.s100,
-              ),
-              const Spacer(),
-              Container(
-                color: Colors.white,
-                height: Dimension.s20,
-                width: Dimension.s100,
-              ),
-            ],
-          ),
-          HeightBox.size16,
-          Container(
-            color: Colors.white,
-            height: Dimension.s48,
-            width: MediaQuery.of(context).size.width,
-          ),
+          // Row(
+          //   children: [
+          //     Container(
+          //       color: Colors.white,
+          //       height: Dimension.s20,
+          //       width: Dimension.s100,
+          //     ),
+          //     const Spacer(),
+          //     Container(
+          //       color: Colors.white,
+          //       height: Dimension.s20,
+          //       width: Dimension.s100,
+          //     ),
+          //   ],
+          // ),
+          // HeightBox.size16,
+          // Container(
+          //   color: Colors.white,
+          //   height: Dimension.s48,
+          //   width: MediaQuery.of(context).size.width,
+          // ),
         ],
       ),
     );

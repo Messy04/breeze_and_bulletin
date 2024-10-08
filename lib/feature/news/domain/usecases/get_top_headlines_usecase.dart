@@ -41,7 +41,7 @@ class GetTopHeadlineUsecase extends UseCase<
         ),
       );
     } catch (e, st) {
-      debugPrint('Stack Trace: getTopHeadLines \n$st');
+      debugPrint('Stack Trace: GetTopHeadLines \n$st');
       return DataFailed(
         DioException(
           message: e.toString(),

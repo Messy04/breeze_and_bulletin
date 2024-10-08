@@ -19,7 +19,7 @@ final class ShowArticlesState extends NewsHomeState {
 }
 
 final class ShowNewsCategories extends NewsHomeState {
-  final Map<int, String> categories;
+  final Map<int, String?> categories;
 
   ShowNewsCategories({required this.categories});
 }

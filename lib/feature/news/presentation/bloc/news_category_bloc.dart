@@ -23,15 +23,15 @@ class NewsCategoryBloc extends Bloc<NewsHomeEvent, NewsHomeState> {
     ));
   }
 
-  Map<int, String> _getCategories() {
+  Map<int, String?> _getCategories() {
     return {
-      0: 'Trending',
+      0: null,
       1: 'Sports',
       2: 'Technology',
-      3: 'Finance',
+      3: 'Business',
       4: 'Science',
       5: 'Health',
-      6: 'Arts',
+      6: 'Entertainment',
     };
   }
 }
