@@ -1,4 +1,4 @@
-import 'package:breeze_and_bulletin/core/utils/app_enums.dart';
+import 'package:breeze_and_bulletin/feature/aqi/domain/entity/air_quality_entity.dart';
 import 'package:equatable/equatable.dart';
 
 class CurrentWeatherEntity extends Equatable {
@@ -28,7 +28,7 @@ class CurrentWeatherEntity extends Equatable {
   final double? dewpointF;
   final double? visKm;
   final double? visMiles;
-  final double? uv;
+  final num? uv;
   final double? gustMph;
   final double? gustKph;
   final int? timeEpoch;
@@ -40,6 +40,7 @@ class CurrentWeatherEntity extends Equatable {
   final int? chanceOfSnow;
   final double? shortRad;
   final double? diffRad;
+  final AirQualityEntity? airQuality;
 
   const CurrentWeatherEntity({
     this.lastUpdatedEpoch,
@@ -80,6 +81,7 @@ class CurrentWeatherEntity extends Equatable {
     this.chanceOfSnow,
     this.shortRad,
     this.diffRad,
+    this.airQuality,
   });
 
   @override
@@ -122,6 +124,7 @@ class CurrentWeatherEntity extends Equatable {
         chanceOfSnow,
         shortRad,
         diffRad,
+        airQuality,
       ];
 }
 

@@ -1,4 +1,8 @@
 import 'package:breeze_and_bulletin/core/resources/app_exceptions.dart';
+import 'package:breeze_and_bulletin/core/resources/data_state.dart';
+import 'package:breeze_and_bulletin/feature/weather/domain/entity/current_weather_entity.dart';
+import 'package:breeze_and_bulletin/feature/weather/domain/entity/location_entity.dart';
+import 'package:breeze_and_bulletin/feature/weather/domain/entity/weather_forecast_entity.dart';
 import 'package:breeze_and_bulletin/feature/weather/domain/entity/weather_response_entity.dart';
 import 'package:breeze_and_bulletin/feature/weather/domain/usecases/get_current_weather_usecase.dart';
 import 'package:breeze_and_bulletin/feature/weather/domain/usecases/get_weather_forecast_usecase.dart';
@@ -35,7 +39,7 @@ class WeatherHomeBloc extends Bloc<WeatherHomeEvent, WeatherHomeState> {
       );
       emit(DataErrorState(message));
     } else {
-      emit(ShowWeatherDetails(response.data));
+      _emitWeatherInfoResponse(emit, response);
     }
   }
 
@@ -54,7 +58,18 @@ class WeatherHomeBloc extends Bloc<WeatherHomeEvent, WeatherHomeState> {
       );
       emit(DataErrorState(message));
     } else {
-      emit(ShowWeatherDetails(response.data));
+      _emitWeatherInfoResponse(emit, response);
     }
+  }
+
+  void _emitWeatherInfoResponse(
+    Emitter<WeatherHomeState> emit,
+    DataState<WeatherResponseEntity?> response,
+  ) {
+    return emit(ShowWeatherDetails(
+      location: response.data?.location,
+      currentWeather: response.data?.currentWeather,
+      forecast: response.data?.forecast,
+    ));
   }
 }

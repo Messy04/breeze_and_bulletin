@@ -23,11 +23,13 @@ class _WeatherApiService implements WeatherApiService {
   @override
   Future<HttpResponse<WeatherResponseModel>> getCurrentWeather({
     String? query = 'Dehri',
+    String? aqi = 'yes',
     String apiKey = weatherApiKey,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'q': query,
+      r'aqi': aqi,
       r'key': apiKey,
     };
     queryParameters.removeWhere((k, v) => v == null);
@@ -59,12 +61,14 @@ class _WeatherApiService implements WeatherApiService {
   Future<HttpResponse<WeatherResponseModel>> getWeatherForecast({
     String? query,
     String? numberOfDays,
+    String? aqi = 'yes',
     String apiKey = weatherApiKey,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'q': query,
       r'days': numberOfDays,
+      r'aqi': aqi,
       r'key': apiKey,
     };
     queryParameters.removeWhere((k, v) => v == null);

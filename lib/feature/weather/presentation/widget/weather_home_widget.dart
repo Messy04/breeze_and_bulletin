@@ -19,6 +19,7 @@ class WeatherHomeWidget extends StatelessWidget {
       builder: (context, state) {
         if (state is ShowWeatherDetails) {
           return Container(
+            height: 160,
             padding: const EdgeInsets.all(Dimension.s16),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -44,23 +45,25 @@ class WeatherHomeWidget extends StatelessWidget {
                 HeightBox.size4,
                 Center(
                   child: Text(
-                    '${state.response?.currentWeather?.tempC ?? 0}°C / ${state.response?.currentWeather?.tempF ?? 0}°F',
+                    '${state.currentWeather?.tempC ?? 0}°C / ${state.currentWeather?.tempF ?? 0}°F',
                     style: PrimaryFont.instance.semiBold(size: Dimension.s24),
                   ),
                 ),
                 HeightBox.size4,
                 Text(
-                  'Humidity: ${state.response?.currentWeather?.humidity}%',
+                  'Humidity: ${state.currentWeather?.humidity}%',
                   style: PrimaryFont.instance.bold(size: Dimension.s16),
                 ),
                 HeightBox.size4,
                 Text(
-                  'Feels Like: ${state.response?.currentWeather?.feelslikeC ?? 0}°C / ${state.response?.currentWeather?.feelslikeF ?? 0}°F',
+                  'Feels Like: ${state.currentWeather?.feelslikeC ?? 0}°C / ${state.currentWeather?.feelslikeF ?? 0}°F',
                   style: PrimaryFont.instance.bold(size: Dimension.s16),
                 ),
               ],
             ),
           );
+        } else if (state is DataErrorState) {
+          return const SizedBox.shrink();
         }
         return ShimmerLoading(
           child: Container(
@@ -85,7 +88,7 @@ class WeatherHomeWidget extends StatelessWidget {
           child: SvgPicture.asset(SvgImage.locationIcon),
         ),
         Text(
-          state.response?.location?.name ?? '',
+          state.location?.name ?? '',
           style: PrimaryFont.instance.bold(size: Dimension.s18),
         ),
       ],
@@ -99,12 +102,11 @@ class WeatherHomeWidget extends StatelessWidget {
           child: CachedNetworkImage(
             height: Dimension.s48,
             width: Dimension.s48,
-            imageUrl:
-                'https:${state.response?.currentWeather?.condition?.icon}',
+            imageUrl: 'https:${state.currentWeather?.condition?.icon}',
           ),
         ),
         Text(
-          state.response?.currentWeather?.condition?.text ?? '',
+          state.currentWeather?.condition?.text ?? '',
           style: PrimaryFont.instance.bold(size: Dimension.s16),
         ),
       ],

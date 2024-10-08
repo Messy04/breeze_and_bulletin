@@ -1,3 +1,7 @@
+import 'package:breeze_and_bulletin/feature/aqi/data/repository/aqi_repository_impl.dart';
+import 'package:breeze_and_bulletin/feature/aqi/domain/repository/aqi_repository.dart';
+import 'package:breeze_and_bulletin/feature/aqi/domain/usecases/get_aqi_usecase.dart';
+import 'package:breeze_and_bulletin/feature/aqi/presentation/bloc/aqi_home_bloc.dart';
 import 'package:breeze_and_bulletin/feature/news/data/data_source/remote_data/news_api_service.dart';
 import 'package:breeze_and_bulletin/feature/news/data/repository/news_repository_impl.dart';
 import 'package:breeze_and_bulletin/feature/news/domain/repository/news_repository.dart';
@@ -32,6 +36,10 @@ void initializeDependencies() {
     WeatherRepositoryImpl(weatherApiService: injector()),
   );
 
+  injector.registerSingleton<AQIRepository>(
+    AQIRepositoryImpl(weatherApiService: injector()),
+  );
+
   // Usecases
   injector.registerSingleton<GetTopHeadlineUsecase>(
     GetTopHeadlineUsecase(newsRepository: injector()),
@@ -49,6 +57,10 @@ void initializeDependencies() {
     GetWeatherForecastUsecase(weatherRepository: injector()),
   );
 
+  injector.registerSingleton<GetAQIUseCase>(
+    GetAQIUseCase(aqiRepository: injector()),
+  );
+
   // Blocs
   injector.registerFactory<TopNewsBloc>(
     () => TopNewsBloc(topHeadlineUsecase: injector()),
@@ -58,6 +70,12 @@ void initializeDependencies() {
     () => WeatherHomeBloc(
       getWeatherForecastUsecase: injector(),
       getCurrentWeatherUsecase: injector(),
+    ),
+  );
+
+  injector.registerFactory<AqiHomeBloc>(
+    () => AqiHomeBloc(
+      getAQIUseCase: injector(),
     ),
   );
 }

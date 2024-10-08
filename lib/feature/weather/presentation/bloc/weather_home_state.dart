@@ -6,9 +6,11 @@ sealed class WeatherHomeState {}
 final class WeatherLoadingState extends WeatherHomeState {}
 
 final class ShowWeatherDetails extends WeatherHomeState {
-  final WeatherResponseEntity? response;
+  final LocationEntity? location;
+  final CurrentWeatherEntity? currentWeather;
+  final WeatherForecastEntity? forecast;
 
-  ShowWeatherDetails(this.response);
+  ShowWeatherDetails({this.location, this.currentWeather, this.forecast});
 }
 
 final class DataErrorState extends WeatherHomeState {

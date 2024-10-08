@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:breeze_and_bulletin/core/utils/app_enums.dart';
+import 'package:breeze_and_bulletin/feature/aqi/data/model/air_quality_model.dart';
 import 'package:breeze_and_bulletin/feature/weather/domain/entity/current_weather_entity.dart';
 
 class CurrentWeatherModel extends CurrentWeatherEntity {
@@ -31,7 +31,7 @@ class CurrentWeatherModel extends CurrentWeatherEntity {
   final double? dewpointF;
   final double? visKm;
   final double? visMiles;
-  final double? uv;
+  final num? uv;
   final double? gustMph;
   final double? gustKph;
   final int? timeEpoch;
@@ -43,6 +43,7 @@ class CurrentWeatherModel extends CurrentWeatherEntity {
   final int? chanceOfSnow;
   final double? shortRad;
   final double? diffRad;
+  final AirQualityModel? airQuality;
 
   const CurrentWeatherModel({
     this.lastUpdatedEpoch,
@@ -83,6 +84,7 @@ class CurrentWeatherModel extends CurrentWeatherEntity {
     this.chanceOfSnow,
     this.shortRad,
     this.diffRad,
+    this.airQuality,
   });
 
   factory CurrentWeatherModel.fromRawJson(String str) =>
@@ -132,6 +134,9 @@ class CurrentWeatherModel extends CurrentWeatherEntity {
         chanceOfSnow: json["chance_of_snow"],
         shortRad: json["short_rad"]?.toDouble(),
         diffRad: json["diff_rad"]?.toDouble(),
+        airQuality: json["air_quality"] == null
+            ? null
+            : AirQualityModel.fromJson(json["air_quality"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -173,6 +178,7 @@ class CurrentWeatherModel extends CurrentWeatherEntity {
         "chance_of_snow": chanceOfSnow,
         "short_rad": shortRad,
         "diff_rad": diffRad,
+        "air_quality": airQuality,
       };
 }
 

@@ -22,7 +22,7 @@ class NewsPageView extends StatelessWidget {
       builder: (context, state) {
         if (state is ShowArticlesState) {
           return AspectRatio(
-            aspectRatio: 320 / 280,
+            aspectRatio: 320 / 260,
             child: OverflowBox(
               maxWidth: MediaQuery.of(context).size.width,
               child: PageView.builder(

@@ -12,6 +12,7 @@ abstract class WeatherApiService {
   @GET('current.json')
   Future<HttpResponse<WeatherResponseModel>> getCurrentWeather({
     @Query('q') String? query = 'Dehri',
+    @Query('aqi') String? aqi = 'yes',
     @Query('key') String apiKey = weatherApiKey,
   });
 
@@ -19,6 +20,7 @@ abstract class WeatherApiService {
   Future<HttpResponse<WeatherResponseModel>> getWeatherForecast({
     @Query('q') String? query,
     @Query('days') String? numberOfDays,
+    @Query('aqi') String? aqi = 'yes',
     @Query('key') String apiKey = weatherApiKey,
   });
 

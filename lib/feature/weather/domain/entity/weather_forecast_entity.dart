@@ -44,20 +44,20 @@ class DayEntity extends Equatable {
   final double? mintempF;
   final double? avgtempC;
   final double? avgtempF;
-  final int? maxwindMph;
+  final double? maxwindMph;
   final double? maxwindKph;
   final double? totalprecipMm;
   final double? totalprecipIn;
-  final int? totalsnowCm;
-  final int? avgvisKm;
-  final int? avgvisMiles;
+  final double? totalsnowCm;
+  final double? avgvisKm;
+  final double? avgvisMiles;
   final int? avghumidity;
   final int? dailyWillItRain;
   final int? dailyChanceOfRain;
   final int? dailyWillItSnow;
   final int? dailyChanceOfSnow;
   final ConditionEntity? condition;
-  final int? uv;
+  final double? uv;
 
   const DayEntity({
     this.maxtempC,
