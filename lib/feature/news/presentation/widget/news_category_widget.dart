@@ -1,7 +1,7 @@
 import 'package:breeze_and_bulletin/config/theme/app_colors.dart';
 import 'package:breeze_and_bulletin/config/theme/app_fonts.dart';
 import 'package:breeze_and_bulletin/core/constants/dimension.dart';
-import 'package:breeze_and_bulletin/core/constants/spacing.dart';
+import 'package:breeze_and_bulletin/core/utils/app_extensions.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/bloc/news_category_bloc.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/bloc/news_home_bloc.dart';
 import 'package:breeze_and_bulletin/generated/l10n.dart';
@@ -38,7 +38,7 @@ class NewsCategoryWidget extends StatelessWidget {
                     },
                     child: _buildCategoryContainer(index, state),
                   ),
-                  WidthBox.size8,
+                  8.width,
                 ],
               );
             },

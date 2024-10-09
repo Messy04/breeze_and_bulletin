@@ -13,9 +13,9 @@ final class NewsLoadingState extends NewsHomeState {}
 
 final class ShowArticlesState extends NewsHomeState {
   final ArticleEntityList articles;
-  final int pageNumber;
+  // final int pageNumber;
 
-  ShowArticlesState({required this.articles, this.pageNumber = 0});
+  ShowArticlesState({required this.articles});
 }
 
 final class ShowNewsCategories extends NewsHomeState {

@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => NewsCategoryBloc(),
           ),
         ],
-        child: HomePage(),
+        child: const HomePage(),
       ),
     );
   }

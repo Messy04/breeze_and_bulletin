@@ -11,7 +11,7 @@ class TopNewsBloc extends Bloc<NewsHomeEvent, NewsHomeState> {
 
   TopNewsBloc({required this.topHeadlineUsecase}) : super(NewsLoadingState()) {
     on<GetTopHeadlinesEvent>(_onGetTopHeadlinesEvent);
-    on<NewsPageChangedEvent>(_onNewsPageChangedEvent);
+    // on<NewsPageChangedEvent>(_onNewsPageChangedEvent);
   }
 
    ArticleEntityList _articles = [];
@@ -37,14 +37,14 @@ class TopNewsBloc extends Bloc<NewsHomeEvent, NewsHomeState> {
       emit(DataErrorState(message));
     } else {
       _articles = response.data ?? [];
-      emit(ShowArticlesState(articles: _articles, pageNumber: 0));
+      emit(ShowArticlesState(articles: _articles));
     }
   }
 
-  void _onNewsPageChangedEvent(
-    NewsPageChangedEvent event,
-    Emitter<NewsHomeState> emit,
-  ) {
-    emit(ShowArticlesState(articles: _articles, pageNumber: event.pageNumber));
-  }
+  // void _onNewsPageChangedEvent(
+  //   NewsPageChangedEvent event,
+  //   Emitter<NewsHomeState> emit,
+  // ) {
+  //   emit(ShowArticlesState(articles: _articles, pageNumber: event.pageNumber));
+  // }
 }

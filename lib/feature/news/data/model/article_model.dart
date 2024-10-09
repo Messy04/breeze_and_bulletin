@@ -2,7 +2,6 @@ import 'package:breeze_and_bulletin/feature/news/data/model/source_model.dart';
 import 'package:breeze_and_bulletin/feature/news/domain/entity/article_entity.dart';
 
 class ArticleModel extends ArticleEntity {
-  
   // SourceModel? source;
   // String? author;
   // String? title;
@@ -24,7 +23,8 @@ class ArticleModel extends ArticleEntity {
   });
 
   ArticleModel.fromJson(Map<String, dynamic> json) {
-    source = json['source'] != null ? SourceModel.fromJson(json['source']) : null;
+    source =
+        json['source'] != null ? SourceModel.fromJson(json['source']) : null;
     author = json['author'];
     title = json['title'];
     description = json['description'];
@@ -48,4 +48,30 @@ class ArticleModel extends ArticleEntity {
     data['content'] = content;
     return data;
   }
+
+  // // Convert model to JSON
+  // Map<String, dynamic> toJson() {
+  //   return {
+  //     'country': country,
+  //     'category': category,
+  //     'sources': sources,
+  //     'query': query,
+  //     'sortBy': sortBy,
+  //     'pageSize': pageSize,
+  //     'page': page,
+  //   };
+  // }
+
+  // // Create model from JSON
+  // factory ArticleRequestModel.fromJson(Map<String, dynamic> json) {
+  //   return ArticleRequestModel(
+  //     country: json['country'] as String?,
+  //     category: json['category'] as String?,
+  //     sources: json['sources'] as String?,
+  //     query: json['query'] as String?,
+  //     sortBy: json['sortBy'] as String?,
+  //     pageSize: json['pageSize'] as int?,
+  //     page: json['page'] as int?,
+  //   );
+  // }
 }

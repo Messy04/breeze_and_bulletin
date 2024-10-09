@@ -9,11 +9,11 @@ final class GetHomeNewsEvent extends NewsHomeEvent {
   GetHomeNewsEvent({this.category});
 }
 
-final class NewsPageChangedEvent extends NewsHomeEvent {
-  final int pageNumber;
-
-  NewsPageChangedEvent(this.pageNumber);
-}
+// final class NewsPageChangedEvent extends NewsHomeEvent {
+//   final int pageNumber;
+//
+//   NewsPageChangedEvent(this.pageNumber);
+// }
 
 final class GetNewsCategories extends NewsHomeEvent {}
 

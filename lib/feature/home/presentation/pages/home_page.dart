@@ -1,6 +1,6 @@
 import 'package:breeze_and_bulletin/core/constants/dimension.dart';
-import 'package:breeze_and_bulletin/core/constants/spacing.dart';
 import 'package:breeze_and_bulletin/core/resources/injection_container.dart';
+import 'package:breeze_and_bulletin/core/utils/app_extensions.dart';
 import 'package:breeze_and_bulletin/feature/aqi/presentation/bloc/aqi_home_bloc.dart';
 import 'package:breeze_and_bulletin/feature/aqi/presentation/widgets/aqi_home_widget.dart';
 import 'package:breeze_and_bulletin/feature/home/presentation/widget/bottom_nav_bar.dart';
@@ -36,19 +36,19 @@ class HomePage extends StatelessWidget {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    HeightBox.size48,
+                    48.height,
                     Row(
                       children: [
                         const Expanded(child: SearchWidget()),
-                        WidthBox.size16,
+                        16.width,
                         const NotificationWidget(),
                       ],
                     ),
-                    HeightBox.size24,
+                    24.height,
                     _newsCategoriesSection(context, state),
-                    HeightBox.size16,
+                    16.height,
                     _topNewsSection(context, state),
-                    HeightBox.size16,
+                    16.height,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -64,6 +64,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+      extendBody: true,
       bottomNavigationBar: const BottomNavBar(),
     );
   }
