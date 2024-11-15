@@ -2,6 +2,7 @@ import 'package:breeze_and_bulletin/config/theme/app_colors.dart';
 import 'package:breeze_and_bulletin/config/theme/app_fonts.dart';
 import 'package:breeze_and_bulletin/core/constants/dimension.dart';
 import 'package:breeze_and_bulletin/core/resources/widgets/shimmer_loading.dart';
+import 'package:breeze_and_bulletin/core/utils/app_extensions.dart';
 import 'package:breeze_and_bulletin/feature/aqi/presentation/bloc/aqi_home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,9 +50,11 @@ class AQIHomeWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'AQI: ${state.airQuality?.pm10}',
+            'AQI\n${state.airQuality?.pm10}',
             style: PrimaryFont.instance.bold(size: Dimension.s24),
+            textAlign: TextAlign.center,
           ),
+          4.height,
           Text(
             'Satisfactory',
             style: PrimaryFont.instance.semiBold(size: Dimension.s18),

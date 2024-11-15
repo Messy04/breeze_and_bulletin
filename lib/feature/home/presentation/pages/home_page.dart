@@ -10,12 +10,13 @@ import 'package:breeze_and_bulletin/feature/news/presentation/bloc/news_home_blo
 import 'package:breeze_and_bulletin/feature/news/presentation/bloc/top_news_bloc.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/widget/news_category_widget.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/widget/top_news_widget.dart';
-import 'package:breeze_and_bulletin/feature/home/presentation/widget/search_widget.dart';
 import 'package:breeze_and_bulletin/feature/weather/presentation/bloc/weather_home_bloc.dart';
 import 'package:breeze_and_bulletin/feature/weather/presentation/widget/weather_home_widget.dart';
-import 'package:breeze_and_bulletin/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+
+import '../../../../generated/locales.g.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -37,23 +38,24 @@ class HomePage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     48.height,
-                    Row(
+                    const Row(
                       children: [
-                        const Expanded(child: SearchWidget()),
-                        16.width,
-                        const NotificationWidget(),
+                        // const Expanded(child: SearchWidget()),
+                        // 16.width,
+                        Spacer(),
+                        NotificationWidget(),
                       ],
                     ),
                     24.height,
-                    _newsCategoriesSection(context, state),
+                    _NewsCategoryWidget(state),
                     16.height,
-                    _topNewsSection(context, state),
+                    _TopNewsWidget(state),
                     16.height,
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _weatherWidget(),
-                        _airQualityWidget(),
+                        _WeatherWidget(),
+                        _AirQualityWidget(),
                       ],
                     ),
                   ],
@@ -68,17 +70,49 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: const BottomNavBar(),
     );
   }
+}
 
-  BlocProvider<AqiHomeBloc> _airQualityWidget() {
-    return BlocProvider(
-      create: (context) => AqiHomeBloc(
-        getAQIUseCase: injector(),
-      )..add(GetAirQualityEvent()),
-      child: const AQIHomeWidget(),
+class _TopNewsWidget extends StatelessWidget {
+  const _TopNewsWidget(this.state);
+
+  final NewsHomeInitial state;
+
+  @override
+  Widget build(BuildContext context) {
+    context
+        .read<TopNewsBloc>()
+        .add(GetTopHeadlinesEvent(category: state.category));
+    return TopNewsWidget(
+      title: state.category ?? LocaleKeys.trendingTitle.tr,
     );
   }
+}
 
-  BlocProvider<WeatherHomeBloc> _weatherWidget() {
+class _NewsCategoryWidget extends StatelessWidget {
+  const _NewsCategoryWidget(this.state);
+
+  final NewsHomeInitial state;
+
+  @override
+  Widget build(BuildContext context) {
+    context.read<NewsCategoryBloc>().add(GetNewsCategories());
+    return SizedBox(
+      height: Dimension.s50,
+      child: NewsCategoryWidget(
+        selectedCategory: state.category ?? LocaleKeys.trendingTitle.tr,
+        onSelection: (index, value) {
+          context.read<NewsHomeBloc>().add(GetHomeNewsEvent(category: value));
+        },
+      ),
+    );
+  }
+}
+
+class _WeatherWidget extends StatelessWidget {
+  const _WeatherWidget();
+
+  @override
+  Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => WeatherHomeBloc(
         getCurrentWeatherUsecase: injector(),
@@ -87,28 +121,18 @@ class HomePage extends StatelessWidget {
       child: const WeatherHomeWidget(),
     );
   }
+}
 
-  Widget _topNewsSection(BuildContext context, NewsHomeInitial state) {
-    context.read<TopNewsBloc>().add(GetTopHeadlinesEvent(
-          category: state.category,
-        ));
-    return TopNewsWidget(
-      title: state.category ?? Strings.of(context).trendingTitle,
-    );
-  }
+class _AirQualityWidget extends StatelessWidget {
+  const _AirQualityWidget();
 
-  Widget _newsCategoriesSection(BuildContext context, NewsHomeInitial state) {
-    context.read<NewsCategoryBloc>().add(GetNewsCategories());
-    return SizedBox(
-      height: Dimension.s50,
-      child: NewsCategoryWidget(
-        selectedCategory: state.category ?? Strings.of(context).trendingTitle,
-        onSelection: (index, value) {
-          context.read<NewsHomeBloc>().add(GetHomeNewsEvent(
-                category: value,
-              ));
-        },
-      ),
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => AqiHomeBloc(
+        getAQIUseCase: injector(),
+      )..add(GetAirQualityEvent()),
+      child: const AQIHomeWidget(),
     );
   }
 }

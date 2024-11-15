@@ -1,10 +1,10 @@
 import 'package:breeze_and_bulletin/config/theme/app_colors.dart';
 import 'package:breeze_and_bulletin/config/theme/app_fonts.dart';
 import 'package:breeze_and_bulletin/core/constants/dimension.dart';
-import 'package:breeze_and_bulletin/core/resources/app_images.dart';
 import 'package:breeze_and_bulletin/core/resources/widgets/shimmer_loading.dart';
 import 'package:breeze_and_bulletin/core/utils/app_extensions.dart';
 import 'package:breeze_and_bulletin/feature/weather/presentation/bloc/weather_home_bloc.dart';
+import 'package:breeze_and_bulletin/gen/assets.gen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,7 +85,7 @@ class WeatherHomeWidget extends StatelessWidget {
         SizedBox(
           height: Dimension.s20,
           width: Dimension.s14,
-          child: SvgPicture.asset(SvgImage.locationIcon),
+          child: SvgPicture.asset(Assets.images.svg.locationIcon),
         ),
         Text(
           state.location?.name ?? '',

@@ -4,9 +4,10 @@ import 'package:breeze_and_bulletin/core/constants/dimension.dart';
 import 'package:breeze_and_bulletin/core/utils/app_extensions.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/bloc/news_category_bloc.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/bloc/news_home_bloc.dart';
-import 'package:breeze_and_bulletin/generated/l10n.dart';
+import 'package:breeze_and_bulletin/generated/locales.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class NewsCategoryWidget extends StatelessWidget {
   final Function(int, String?) onSelection;
@@ -65,7 +66,7 @@ class NewsCategoryWidget extends StatelessWidget {
       ),
       child: Text(
         state.categories.values.toList()[index] ??
-            Strings.current.trendingTitle,
+            LocaleKeys.trendingTitle.tr,
         style: selectedIndex == state.categories.keys.toList()[index]
             ? PrimaryFont.instance.bold(color: Colors.white)
             : PrimaryFont.instance.bold(),

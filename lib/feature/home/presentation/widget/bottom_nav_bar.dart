@@ -1,11 +1,12 @@
 import 'package:breeze_and_bulletin/config/theme/app_colors.dart';
 import 'package:breeze_and_bulletin/config/theme/app_fonts.dart';
 import 'package:breeze_and_bulletin/core/constants/dimension.dart';
-import 'package:breeze_and_bulletin/core/resources/app_images.dart';
 import 'package:breeze_and_bulletin/core/utils/app_extensions.dart';
-import 'package:breeze_and_bulletin/generated/l10n.dart';
+import 'package:breeze_and_bulletin/generated/locales.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../gen/assets.gen.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});
@@ -29,20 +30,20 @@ class BottomNavBar extends StatelessWidget {
         children: [
           Column(
             children: [
-              SvgPicture.asset(SvgImage.homeActive),
+              SvgPicture.asset(Assets.images.svg.homeActive),
               4.height,
               Text(
-                Strings.of(context).homeTitle,
+                LocaleKeys.homeTitle,
                 style: PrimaryFont.instance.regular(),
               ),
             ],
           ),
           Column(
             children: [
-              SvgPicture.asset(SvgImage.favouriteDefault),
+              SvgPicture.asset(Assets.images.svg.favouriteDefault),
               4.height,
               Text(
-                Strings.of(context).favouriteTitle,
+                LocaleKeys.favouriteTitle,
                 style: PrimaryFont.instance.regular(
                   color: AppColors.colorA6A6A6,
                 ),
@@ -51,10 +52,10 @@ class BottomNavBar extends StatelessWidget {
           ),
           Column(
             children: [
-              SvgPicture.asset(SvgImage.profileDefault),
+              SvgPicture.asset(Assets.images.svg.profileDefault),
               4.height,
               Text(
-                Strings.of(context).profileTitle,
+                LocaleKeys.profileTitle,
                 style: PrimaryFont.instance.regular(
                   color: AppColors.colorA6A6A6,
                 ),

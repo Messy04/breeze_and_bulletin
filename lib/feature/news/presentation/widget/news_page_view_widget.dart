@@ -1,3 +1,4 @@
+import 'package:breeze_and_bulletin/config/theme/app_colors.dart';
 import 'package:breeze_and_bulletin/config/theme/app_fonts.dart';
 import 'package:breeze_and_bulletin/core/constants/dimension.dart';
 import 'package:breeze_and_bulletin/core/resources/widgets/shimmer_loading.dart';
@@ -13,6 +14,7 @@ class NewsPageView extends StatelessWidget {
 
   final _controller = PageController(viewportFraction: 1);
   final double imageHeight = 200;
+  final double imageWidth = 320;
 
   @override
   Widget build(BuildContext context) {
@@ -22,91 +24,90 @@ class NewsPageView extends StatelessWidget {
       builder: (context, state) {
         if (state is ShowArticlesState) {
           return AspectRatio(
-            aspectRatio: 320 / 275,
+            aspectRatio: imageWidth / 275,
             child: OverflowBox(
               maxWidth: MediaQuery.of(context).size.width,
               child: PageView.builder(
                 controller: _controller,
                 itemCount: state.articles.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: Dimension.s16,
-                    ),
-                    child: Column(
-                      children: [
-                        _buildImage(context, index, state),
-                        4.height,
-                        _buildArticleBasicInfo(state, index),
-                        8.height,
-                        Text(
-                          state.articles[index].title ?? '',
-                          style: SecondaryFont.instance.bold(
-                            size: Dimension.s20,
-                          ),
-                          maxLines: 3,
-                        ),
-                      ],
-                    ),
+                  return _PageViewItem(
+                    imageHeight: imageHeight,
+                    state: state,
+                    index: index,
                   );
                 },
               ),
             ),
           );
         }
-        return _buildShimmerLoading(context);
+        return _NewsShimmerWidget(
+          imageWidth: imageWidth,
+          imageHeight: imageHeight,
+        );
       },
     );
   }
+}
 
-  Widget _buildArticleBasicInfo(ShowArticlesState state, int index) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: Text(
-            'by ${state.articles[index].author ?? 'Author'}',
-            style: PrimaryFont.instance.bold(),
+class _PageViewItem extends StatelessWidget {
+  const _PageViewItem({
+    required this.imageHeight,
+    required this.state,
+    required this.index,
+  });
+
+  final double imageHeight;
+  final ShowArticlesState state;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        horizontal: Dimension.s16,
+      ),
+      child: Column(
+        children: [
+          _HeadlineImageWidget(
+            imageHeight: imageHeight,
+            imageUrl: state.articles[index].urlToImage,
           ),
-        ),
-        16.width,
-        Text(
-          getFormattedDate(state.articles[index].publishedAt).ddMMMyyyy(),
-          style: PrimaryFont.instance.bold(),
-        ),
-      ],
-    );
-  }
-
-  DateTime getFormattedDate(String? date) {
-    final now = DateTime.now();
-    final formatted = DateTime.parse(date ?? now.toString());
-    return formatted;
-  }
-
-  Widget _buildImage(BuildContext context, int index, ShowArticlesState state) {
-    return SizedBox(
-      height: imageHeight,
-      width: MediaQuery.of(context).size.width,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(Dimension.s8),
-        child: CachedNetworkImage(
-          imageUrl: state.articles[index].urlToImage ?? '',
-          fit: BoxFit.cover,
-          errorWidget: (context, str, obj) {
-            return const Icon(Icons.error_outline_rounded);
-          },
-        ),
+          4.height,
+          _HeadlineBasicInfoWidget(
+            author: state.articles[index].author,
+            publishedAt: state.articles[index].publishedAt,
+          ),
+          8.height,
+          Text(
+            state.articles[index].title ?? '',
+            style: SecondaryFont.instance.bold(
+              size: Dimension.s20,
+            ),
+            maxLines: 3,
+          ),
+        ],
       ),
     );
   }
+}
 
-  Widget _buildShimmerLoading(BuildContext context) {
+class _NewsShimmerWidget extends StatelessWidget {
+  const _NewsShimmerWidget({
+    required this.imageWidth,
+    required this.imageHeight,
+  });
+
+  final double imageWidth;
+  final double imageHeight;
+
+  @override
+  Widget build(BuildContext context) {
     return ShimmerLoading(
       child: Column(
         children: [
           AspectRatio(
-            aspectRatio: 320 / imageHeight,
+            aspectRatio: imageWidth / imageHeight,
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.greenAccent,
@@ -137,6 +138,82 @@ class NewsPageView extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _HeadlineBasicInfoWidget extends StatelessWidget {
+  const _HeadlineBasicInfoWidget({
+    this.publishedAt,
+    this.author,
+  });
+
+  final String? publishedAt;
+  final String? author;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Text(
+            'by ${author ?? 'Author'}',
+            style: PrimaryFont.instance.bold(),
+          ),
+        ),
+        16.width,
+        Text(
+          getFormattedDate(publishedAt).ddMMMyyyy(),
+          style: PrimaryFont.instance.bold(),
+        ),
+      ],
+    );
+  }
+
+  DateTime getFormattedDate(String? date) {
+    final now = DateTime.now();
+    final formatted = DateTime.parse(date ?? now.toString());
+    return formatted;
+  }
+}
+
+class _HeadlineImageWidget extends StatelessWidget {
+  const _HeadlineImageWidget({
+    required this.imageHeight,
+    this.imageUrl,
+  });
+
+  final double imageHeight;
+  final String? imageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: imageHeight,
+      width: MediaQuery.of(context).size.width,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(Dimension.s8),
+        child: CachedNetworkImage(
+          imageUrl: imageUrl ?? '',
+          fit: BoxFit.cover,
+          errorWidget: (context, str, obj) {
+            return Container(
+              color: AppColors.shimmerBase,
+              child: const Icon(
+                Icons.error_outline_rounded,
+              ),
+            );
+          },
+          placeholder: (context, str) {
+            return ShimmerLoading(
+              child: Container(
+                color: Colors.white,
+              ),
+            );
+          },
+        ),
       ),
     );
   }

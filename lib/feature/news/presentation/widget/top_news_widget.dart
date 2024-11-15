@@ -3,8 +3,9 @@ import 'package:breeze_and_bulletin/config/theme/app_fonts.dart';
 import 'package:breeze_and_bulletin/core/constants/dimension.dart';
 import 'package:breeze_and_bulletin/core/utils/app_extensions.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/widget/news_page_view_widget.dart';
-import 'package:breeze_and_bulletin/generated/l10n.dart';
+import 'package:breeze_and_bulletin/generated/locales.g.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class TopNewsWidget extends StatelessWidget {
   final String title;
@@ -35,7 +36,7 @@ class TopNewsWidget extends StatelessWidget {
         TextButton(
           onPressed: () {},
           child: Text(
-            Strings.of(context).seeAll,
+            LocaleKeys.seeAll.tr,
             style: PrimaryFont.instance.semiBold(
               size: Dimension.s18,
               color: AppColors.secondary,

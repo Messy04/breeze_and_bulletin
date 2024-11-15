@@ -1,10 +1,10 @@
 import 'package:breeze_and_bulletin/core/resources/injection_container.dart';
 import 'package:breeze_and_bulletin/feature/home/presentation/pages/home_page.dart';
 import 'package:breeze_and_bulletin/feature/news/presentation/bloc/top_news_bloc.dart';
-import 'package:breeze_and_bulletin/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'core/constants/constants.dart';
 import 'feature/news/presentation/bloc/news_category_bloc.dart';
 import 'feature/news/presentation/bloc/news_home_bloc.dart';
 
@@ -24,7 +24,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      localizationsDelegates: const [Strings.delegate],
+      locale: localesEnUs,
+      // localizationsDelegates: const [Strings.delegate],
       home: MultiBlocProvider(
         providers: [
           BlocProvider<NewsHomeBloc>(

@@ -1,11 +1,3 @@
 {
-  "searchHint": "From Crypto to Football to the Mars",
-  "seeAll": "See All",
-  "homeTitle": "Home",
-  "favouriteTitle": "Favourite",
-  "profileTitle": "Profile",
-  "connectionError": "Unable to establish connection, Please try after sometime.",
-  "connectionTimeoutError": "Connection timeout, Please try again.",
-  "somethingWentWrong": "Something went wrong, Please try after sometime.",
-  "trendingTitle": "Trending"
+
 }

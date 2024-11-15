@@ -14,7 +14,7 @@ class TopNewsBloc extends Bloc<NewsHomeEvent, NewsHomeState> {
     // on<NewsPageChangedEvent>(_onNewsPageChangedEvent);
   }
 
-   ArticleEntityList _articles = [];
+  ArticleEntityList _articles = [];
 
   Future<void> _onGetTopHeadlinesEvent(
     GetTopHeadlinesEvent event,
@@ -37,14 +37,19 @@ class TopNewsBloc extends Bloc<NewsHomeEvent, NewsHomeState> {
       emit(DataErrorState(message));
     } else {
       _articles = response.data ?? [];
-      emit(ShowArticlesState(articles: _articles));
+      emit(ShowArticlesState(
+          articles: _articles.where(
+        (element) {
+          return (element.urlToImage != null);
+        },
+      ).toList()));
     }
   }
 
-  // void _onNewsPageChangedEvent(
-  //   NewsPageChangedEvent event,
-  //   Emitter<NewsHomeState> emit,
-  // ) {
-  //   emit(ShowArticlesState(articles: _articles, pageNumber: event.pageNumber));
-  // }
+// void _onNewsPageChangedEvent(
+//   NewsPageChangedEvent event,
+//   Emitter<NewsHomeState> emit,
+// ) {
+//   emit(ShowArticlesState(articles: _articles, pageNumber: event.pageNumber));
+// }
 }

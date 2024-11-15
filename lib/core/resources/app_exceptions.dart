@@ -1,15 +1,17 @@
-import 'package:breeze_and_bulletin/generated/l10n.dart';
 import 'package:dio/dio.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
+
+import '../../generated/locales.g.dart';
 
 class AppException {
   String getExceptionMessage(DioExceptionType exceptionType) {
-    switch(exceptionType) {
+    switch (exceptionType) {
       case DioExceptionType.connectionError:
-        return Strings.current.connectionError;
+        return LocaleKeys.connectionError.tr;
       case DioExceptionType.connectionTimeout:
-        return Strings.current.connectionTimeoutError;
+        return LocaleKeys.connectionTimeoutError.tr;
       default:
-        return Strings.current.somethingWentWrong;
+        return LocaleKeys.somethingWentWrong.tr;
     }
   }
 }
